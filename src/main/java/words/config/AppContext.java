@@ -3,9 +3,9 @@ package words.config;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class AppContext {
-    private AnnotationConfigApplicationContext context;
+    private static AnnotationConfigApplicationContext context;
 
-    public AnnotationConfigApplicationContext getContext() {
+    public static AnnotationConfigApplicationContext getContext() {
         if (context == null) {
             context = new AnnotationConfigApplicationContext(AppConfig.class);
         }

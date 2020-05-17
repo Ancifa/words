@@ -6,13 +6,13 @@ import java.util.*;
 
 @Getter
 public class Processor {
-    private final String EMPTY = "";
-    private final String SPACE = " ";
-    private final List<String> exclusions = Arrays.asList(
-            "a", "an", "and", "are", "as", "at", "am", "all",
+    private static final String EMPTY = "";
+    private static final String SPACE = " ";
+    public static final List<String> exclusions = Arrays.asList(
+            "a", "an", "and", "are", "as", "at", "am",
             "be", "been", "by",
             "can", "could",
-            "do", "did", "done", "dont",
+            "do", "did", "done", "dont", "don't",
             "for", "from",
             "give",
             "have", "has", "had", "he", "his", "her",
@@ -21,13 +21,14 @@ public class Processor {
             "no", "not",
             "of", "off", "out", "or", "our", "ours", "on",
             "she", "shall", "should",
-            "to", "they", "their", "theirs", "this", "that", "these", "those", "the", "thank", "thanks",
+            "to", "they", "their", "theirs", "this", "that", "these", "those", "the",
             "us", "up",
             "what", "with", "without", "when", "where", "will", "would",
             "yes", "you", "your", "yours",
             EMPTY, SPACE
     );
     private int counter;
+    private boolean isRemoveExclusionsNeeded;
 
     private Sentence sentence;
 
@@ -41,7 +42,7 @@ public class Processor {
     public List<Word> processWords(String text) {
         Map<Integer, String> sentences = getSentences(text);
         List<Word> words = getWords(sentences);
-//        removeExclusions(words);
+        removeExclusions(words);
         counter = words.size();
 
         return words;
@@ -91,7 +92,13 @@ public class Processor {
         return newWordsList;
     }
 
-    private void removeExclusions(List<String> source) {
-        source.removeIf(exclusions::contains);
+    private void removeExclusions(List<Word> source) {
+        if (isRemoveExclusionsNeeded) {
+            source.removeIf(word -> exclusions.contains(word.getItem()));
+        }
+    }
+
+    public void setRemoveExclusionsNeeded(boolean removeExclusionsNeeded) {
+        isRemoveExclusionsNeeded = removeExclusionsNeeded;
     }
 }

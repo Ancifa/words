@@ -53,14 +53,14 @@ public class ResultBlock extends VerticalLayout {
             }
 
             Button wordButton = new Button(word.getItem());
-            setButtonStyle(wordButton, "170px");
+            UiUtils.setButtonAsLabelStyle(wordButton, 170);
             wordButton.addClickListener(c -> createWindow(word));
 
             Label quantityLabel = new Label(word.getQuantity() + "");
             quantityLabel.getStyle().set("width", "100px");
 
             Button sentenceButton = new Button(Integer.toString(word.getSentenceNumber()));
-            setButtonStyle(sentenceButton, "100px");
+            UiUtils.setButtonAsLabelStyle(sentenceButton, 100);
 
             sentenceButton.addClickListener(c -> {
                 Dialog dialog = new Dialog();
@@ -72,16 +72,6 @@ public class ResultBlock extends VerticalLayout {
             add(hl);
             count++;
         }
-    }
-
-    private void setButtonStyle(Button button, String width) {
-        button.getStyle().set("padding", "0px");
-        button.getStyle().set("margin-top", "1px");
-        button.getStyle().set("height", "0px");
-        button.getStyle().set("width", width);
-        button.getStyle().set("border", "none");
-        button.getStyle().set("background", "none");
-        button.getStyle().set("cursor", "pointer");
     }
 
     private void createWindow(Word word) {

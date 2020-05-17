@@ -2,6 +2,7 @@ package words.ui.mainview;
 
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import words.config.AppContext;
 import words.processor.Processor;
 import words.processor.Sentence;
 import words.processor.Word;
@@ -13,8 +14,8 @@ public class MainViewPresenter {
     private final Processor processor;
     private MainView view;
 
-    public MainViewPresenter(Processor processor) {
-        this.processor = processor;
+    public MainViewPresenter() {
+        processor = AppContext.getContext().getBean(Processor.class);
     }
 
     void setView(MainView view) {
@@ -24,6 +25,7 @@ public class MainViewPresenter {
     void initListeners() {
         view.getStartButtonWords().addClickListener(click -> {
             String text = view.getTextArea().getValue();
+            processor.setRemoveExclusionsNeeded(view.getUseExclusionsChkBox().getValue());
             List<Word> words = processor.processWords(text);
             viewResult(words, processor.getSentence());
         });
