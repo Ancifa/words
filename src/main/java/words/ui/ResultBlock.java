@@ -1,6 +1,7 @@
 package words.ui;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -38,7 +39,7 @@ public class ResultBlock extends VerticalLayout {
         add(header);
     }
 
-    public void buildResultRows(List<Word> result, Sentence sentence) {
+    public void buildResultRows(List<Word> result, Sentence sentence, Checkbox dictionaryCheckBox) {
         buildHeader();
 
         int count = 0;
@@ -54,7 +55,7 @@ public class ResultBlock extends VerticalLayout {
 
             Button wordButton = new Button(word.getItem());
             UiUtils.setButtonAsLabelStyle(wordButton, 170);
-            wordButton.addClickListener(c -> createWindow(word));
+            wordButton.addClickListener(c -> createWindow(word, dictionaryCheckBox.getValue()));
 
             Label quantityLabel = new Label(word.getQuantity() + "");
             quantityLabel.getStyle().set("width", "100px");
@@ -74,12 +75,12 @@ public class ResultBlock extends VerticalLayout {
         }
     }
 
-    private void createWindow(Word word) {
+    private void createWindow(Word word, boolean isThesaurusDictionary) {
         String item = word.getItem();
         Dialog dialog = new Dialog(new Label(item.toUpperCase()));
 
         VerticalLayout contentLayout = new VerticalLayout();
-        List<String> definitionList = DictionaryService.getDefinition(item, true);
+        List<String> definitionList = DictionaryService.getDefinition(item, isThesaurusDictionary);
         definitionList.forEach(definition -> {
             Label contentLabel = new Label(definition);
             contentLayout.add(contentLabel);

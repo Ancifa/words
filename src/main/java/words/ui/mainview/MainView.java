@@ -8,23 +8,28 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.Route;
 import lombok.Getter;
-import words.config.AppContext;
 import words.ui.ResultBlock;
 import words.ui.UiUtils;
 
 @Route
 @Getter
 public class MainView extends VerticalLayout {
+    public static final String COLLEGIATE = "Collegiate";
+    public static final String THESAURUS = "Thesaurus Dictionary";
+
     private TextArea textArea;
     private VerticalLayout filtersLayout;
     private Checkbox useExclusionsChkBox;
+    private Checkbox dictionaryCheckBox;
     private Button startButtonWords;
     private Button startButtonSentences;
     private Label countLabel;
     private final ResultBlock resultBlock;
+    private final ExclusionsWindow exclusionsWindow;
 
-    public MainView(MainViewPresenter mainViewPresenter, ResultBlock resultBlock) {
+    public MainView(MainViewPresenter mainViewPresenter, ResultBlock resultBlock, ExclusionsWindow exclusionsWindow) {
         this.resultBlock = resultBlock;
+        this.exclusionsWindow = exclusionsWindow;
         initElements();
         buildLayout();
         mainViewPresenter.setView(this);
@@ -53,11 +58,12 @@ public class MainView extends VerticalLayout {
         useExclusionsChkBox = new Checkbox();
         Button exclusionsButton = new Button("Use built-in exclusions");
         UiUtils.setButtonAsLabelStyle(exclusionsButton);
-        exclusionsButton.addClickListener(click ->
-                AppContext.getContext().getBean(ExclusionsWindow.class).open());
+        exclusionsButton.addClickListener(click -> exclusionsWindow.open());
         chkBoxLyt.add(useExclusionsChkBox, exclusionsButton);
 
-        filtersLayout.add(chkBoxLyt);
+        dictionaryCheckBox = new Checkbox(THESAURUS);
+
+        filtersLayout.add(chkBoxLyt, dictionaryCheckBox);
     }
 
     private void buildButtons() {

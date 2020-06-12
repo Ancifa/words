@@ -17,6 +17,7 @@ public class AppConfig {
         return new ResultBlock();
     }
 
+    @UIScope
     @Bean
     public ExclusionsWindow exclusionsWindow() {
         return new ExclusionsWindow();
@@ -25,7 +26,7 @@ public class AppConfig {
     @UIScope
     @Bean
     public MainView mainView() {
-        return new MainView(mainViewPresenter(), resultBlock());
+        return new MainView(mainViewPresenter(), resultBlock(), exclusionsWindow());
     }
 
     @Bean

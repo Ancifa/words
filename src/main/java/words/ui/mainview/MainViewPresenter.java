@@ -39,7 +39,7 @@ public class MainViewPresenter {
 
     private void viewResult(List<Word> result, Sentence sentence) {
         view.getResultBlock().removeAll();
-        view.getResultBlock().buildResultRows(result, sentence);
+        view.getResultBlock().buildResultRows(result, sentence, view.getDictionaryCheckBox());
         view.getResultBlock().setVisible(true);
 
         view.getCountLabel().setText(processor.getCounter() + " words");

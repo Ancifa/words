@@ -29,9 +29,9 @@ public class DictionaryService {
 
     private static final RestTemplate restTemplate = new RestTemplate();
 
-    public static List<String> getDefinition(String item, boolean isCollegiate) {
-        String url = isCollegiate ? SERVICE_URL + COLLEGIATE_URL : SERVICE_URL + THESAURUS_URL;
-        String key = isCollegiate ? COLLEGIATE_KEY : THESAURUS_KEY;
+    public static List<String> getDefinition(String item, boolean isThesaurusDictionary) {
+        String url = isThesaurusDictionary ? SERVICE_URL + THESAURUS_URL : SERVICE_URL + COLLEGIATE_URL;
+        String key = isThesaurusDictionary ? THESAURUS_KEY : COLLEGIATE_KEY;
 
         String urlString = url + item;
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(urlString)

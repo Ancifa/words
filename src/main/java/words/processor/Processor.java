@@ -12,7 +12,7 @@ public class Processor {
             "a", "an", "and", "are", "as", "at", "am",
             "be", "been", "by",
             "can", "could",
-            "do", "did", "done", "dont", "don't",
+            "do", "does", "did", "done", "dont", "don't",
             "for", "from",
             "give",
             "have", "has", "had", "he", "his", "her",
@@ -21,9 +21,9 @@ public class Processor {
             "no", "not",
             "of", "off", "out", "or", "our", "ours", "on",
             "she", "shall", "should",
-            "to", "they", "their", "theirs", "this", "that", "these", "those", "the",
+            "to", "they", "their", "theirs", "this", "that", "these", "those", "the", "there",
             "us", "up",
-            "what", "with", "without", "when", "where", "will", "would",
+            "what", "with", "without", "when", "where", "will", "would", "we",
             "yes", "you", "your", "yours",
             EMPTY, SPACE
     );
