@@ -7,8 +7,8 @@
     "@vaadin/flow-deps": "./target/frontend"
   },
   "devDependencies": {
-    "webpack": "4.30.0",
-    "webpack-cli": "3.3.12",
+    "webpack": "5.92.0",
+    "webpack-cli": "5.1.4",
     "webpack-dev-server": "5.0.4",
     "webpack-babel-multi-target-plugin": "2.5.0",
     "copy-webpack-plugin": "5.1.0",
